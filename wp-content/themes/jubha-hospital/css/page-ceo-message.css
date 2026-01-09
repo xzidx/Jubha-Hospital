@@ -1,0 +1,45 @@
+.space-more{
+    height: 50px;
+    
+}
+/* .message{
+    width: 100%;
+}
+.message-our{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+     margin-top: 50px;
+}
+.message-our h1{
+    margin-left: 100px;
+   
+} */
+.our-futuer{
+    width: 100%;
+    display: flex;
+}
+.our-futuer-text{
+    justify-content: space-between;
+    align-items: center;
+    display: inline;
+    margin-top: 30px;
+}
+.our-futuer-text h1{
+    color: skyblue;
+}
+.our-about-ceo{
+    width: 100%;
+}
+.our-about-ceo p{
+    margin-left: 20px;
+}
+.about-ceo{
+    width: 100%;
+}
+.about-ceo p{
+    margin-left: 20px
+}
+.dot-icon{
+    font-size: 2px;
+}
