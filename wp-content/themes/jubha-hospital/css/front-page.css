@@ -8,7 +8,7 @@ body {
 .hero-container {
   position: relative;
   width: 100%;
-  height: 92.7vh; 
+  height: 96vh; 
   overflow: hidden;
   border-radius: 0;
   margin: auto;
@@ -227,3 +227,495 @@ body {
         border-radius: 10px;
         padding: 5px;
     }
+
+
+
+
+/* Container and Layout */
+.about-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif; /* Clean font like Image 1 */
+}
+
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 50px;
+}
+
+/* Text Styling */
+.about-text-column {
+    flex: 1;
+}
+
+.sub-heading {
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.main-title {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 10px 0 20px 0;
+    color: #111;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.learn-more-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #004151; /* Soft green from Image 1 */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    background-color: #aaaaaa;
+}
+
+/* Visual Styling */
+.about-visual-column {
+    flex: 1;
+}
+
+.image-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: visible;
+}
+
+.main-img {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    display: block;
+}
+
+
+/* Divider and Stats */
+.section-divider {
+    border: none;
+    border-top: 1px solid #eaeaea;
+    margin-bottom: 40px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.stat-box {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 54px;
+    font-weight: 800;
+    margin: 0;
+    color: #111;
+}
+
+.stat-text {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+
+/* Department Section Styles */
+.hospital-dept-section {
+    padding-bottom: 80px;
+    background-color: #fcfdfe;
+}
+
+.dept-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Strip Styling */
+.dept-header-strip {
+    background-color: #004151; /* Your Brand Color */
+    padding: 40px 0;
+    margin-bottom: 60px;
+    color: #ffffff;
+}
+
+.dept-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dept-tag {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.dept-main-title {
+    font-size: 32px;
+    margin: 5px 0 0 0;
+    font-weight: 700;
+}
+
+.view-all-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.view-all-link:hover {
+    background: #ffffff;
+    color: #004151;
+}
+
+/* Grid and Card Styling */
+.dept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.dept-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid transparent;
+}
+
+.dept-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,65,81,0.1);
+    border-top: 4px solid #004151;
+}
+
+.dept-icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 65, 81, 0.1);
+    color: #004151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+.dept-name {
+    font-size: 20px;
+    color: #004151;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.dept-desc {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.dept-learn-more {
+    color: #004151;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dept-learn-more span {
+    margin-left: 8px;
+    transition: 0.3s;
+}
+
+.dept-learn-more:hover span {
+    transform: translateX(5px);
+}
+
+
+
+
+
+/* Media Update Styling */
+.medical-update-section {
+    padding: 80px 0;
+    background-color: #f9fbfc;
+}
+
+.mu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 50px;
+}
+
+.mu-tag {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.mu-main-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* Nav Buttons using your #004151 */
+.mu-nav-btn {
+    background: transparent;
+    border: 2px solid #004151;
+    color: #004151;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s ease;
+    margin-left: 10px;
+}
+
+.mu-nav-btn:hover {
+    background: #004151;
+    color: #fff;
+}
+
+/* Unique Grid Layout */
+.mu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.mu-card {
+    background: #fff;
+    border-radius: 0; /* Square edges for a distinct look */
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.mu-card:hover {
+    box-shadow: 0 15px 35px rgba(0,65,81,0.1);
+}
+
+.mu-image-area {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.mu-image-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.mu-card:hover .mu-image-area img {
+    transform: scale(1.1);
+}
+
+.mu-date-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.mu-content-area {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    border-left: 5px solid transparent; /* Hidden border for hover effect */
+    transition: 0.3s;
+}
+
+.mu-card:hover .mu-content-area {
+    border-left-color: #004151;
+}
+
+.mu-category {
+    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.mu-post-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.mu-excerpt {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.mu-read-link {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.mu-read-link span {
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.mu-read-link:hover span {
+    transform: translateX(5px);
+}
+
+
+
+/* --- Hospital Location Section Styles --- */
+.wm-location-section { 
+    padding: 80px 0; 
+    background: #ffffff; 
+}
+
+.wm-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+/* Header Styling */
+.wm-label { 
+    font-size: 14px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    color: #004151; /* Your Brand Color */
+}
+
+.wm-heading { 
+    font-size: 40px; 
+    margin: 10px 0 40px; 
+    font-weight: 800; 
+    color: #004151; /* Your Brand Color */
+}
+
+/* Flex Grid Layout */
+.wm-grid-layout { 
+    display: flex; 
+    gap: 30px; 
+    height: 550px; /* Fixed height to prevent map from disappearing */
+}
+
+/* Sidebar Navigation */
+.wm-sidebar { 
+    flex: 0 0 320px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    overflow-y: auto; /* Adds scroll if you add many hospitals */
+}
+
+.wm-loc-card { 
+    background: #ffffff; 
+    border: 1px solid #f0f0f0; 
+    padding: 25px; 
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border-left: 5px solid transparent;
+}
+
+/* Active State */
+.wm-loc-card.active { 
+    border-left-color: #004151; 
+    background: #f9fbfc; 
+    box-shadow: 0 10px 20px rgba(0, 65, 81, 0.05);
+}
+
+.wm-loc-card:hover { 
+    border-color: #004151; 
+    transform: translateX(5px); 
+}
+
+.wm-loc-card h3 { 
+    color: #004151; 
+    margin: 0 0 5px; 
+    font-size: 18px; 
+    font-weight: 700;
+}
+
+.wm-loc-card p { 
+    color: #777; 
+    font-size: 14px; 
+    margin-bottom: 15px; 
+}
+
+.wm-directions-btn { 
+    color: #004151; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 12px; 
+    text-transform: uppercase; 
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.wm-directions-btn:hover { 
+    border-bottom-color: #004151;
+}
+
+/* Map Container Styling */
+.wm-map-box { 
+    flex-grow: 1; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    border: 1px solid #eee; 
+    background: #f4f4f4; /* Placeholder color before map loads */
+}

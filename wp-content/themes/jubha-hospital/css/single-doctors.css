@@ -1,0 +1,96 @@
+
+
+.more-space {
+    height: 100px;
+}
+
+
+.dr-profile-wrapper {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.dr-header-card {
+    display: flex;
+    background: #004151;
+    border-radius: 4px;
+    color: white;
+    overflow: hidden;
+}
+
+.dr-image-side {
+    flex: 1;
+    background: #f0f0f0;
+    min-height: 450px;
+}
+
+.dr-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dr-content-side {
+    flex: 1.5;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Header Text */
+.dr-prefix { font-size: 1.4rem; margin: 0; }
+.dr-name { font-size: 2.6rem; font-weight: bold; margin: 5px 0; }
+.dr-specialty-label { color: #4fb9c6; font-size: 0.9rem; letter-spacing: 1px; }
+
+/* Meta Grid */
+.dr-meta-grid { margin: 40px 0; }
+.meta-item { margin-bottom: 25px; }
+.meta-label { display: block; color: #4fb9c6; font-size: 0.8rem; margin-bottom: 5px; }
+.meta-value { font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; display: inline-block; }
+
+.dr-book-btn {
+    background: #00b3b3;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    width: fit-content;
+}
+
+/* Bottom Content */
+.dr-details-container { padding: 60px 0; max-width: 900px; }
+.dr-tabs { border-bottom: 1px solid #eee; margin-bottom: 40px; }
+.tab-item.active {
+    color: #004151;
+    font-weight: bold;
+    padding: 15px 0;
+    border-bottom: 3px solid #00b3b3;
+    display: inline-block;
+}
+
+.dr-sub-role { font-size: 1.1rem; color: #333; margin-bottom: 15px; }
+.dr-bio-text { color: #666; line-height: 1.8; margin-bottom: 40px; }
+
+.section-title { font-size: 1.3rem; color: #333; margin: 40px 0 20px; }
+.list-content { color: #777; line-height: 1.8; }
+
+/* Adjusting wpautop lists */
+.list-content p { margin-bottom: 8px; }
+
+.back-link {
+    display: inline-block;
+    margin-top: 60px;
+    color: #004151;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+    .dr-header-card { flex-direction: column; }
+    .dr-content-side { padding: 30px; }
+}
