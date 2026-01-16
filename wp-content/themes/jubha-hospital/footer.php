@@ -15,7 +15,7 @@
   <div class="container">
     <div class="column brand-info">
       <div class="logo-area">
-        <img src="http://jubha-hospital.test/wp-content/uploads/2026/01/jubha-logo.png" alt="Almana Logo" class="logo">
+        <img src="<?php echo get_template_directory_uri(); ?>/picture/jubha-logo.png" alt="Jubha Hospital Logo">
       </div>
       <p>Since our inception in 1949, we have a legacy of excellence. We are a family hospital fully dedicated to caring for the needs of the patients.</p>
     </div>

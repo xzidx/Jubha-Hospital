@@ -4,7 +4,7 @@
 <head>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="<?php echo get_stylesheet_directory(); ?>/css/ceo-message.css">
+    <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/style.css">
     <?php wp_head(); ?>
     
 
@@ -13,10 +13,10 @@
 
 
 <div class="onheader">
-        <div class="onheader-img"><img src="http://jubha-hospital.test/wp-content/uploads/2026/01/jubha-logo.png" alt=""></div>
+        <div class="onheader-img"><img src="<?php echo get_template_directory_uri(); ?>/picture/jubha-logo.png" alt="Jubha Hospital Logo"></div>
         <div class="online-call">
             <a href="">
-                <h2>Careers</h2>
+                
             </a>
             <a href="">
                 <h2><i class="fa-solid fa-user phone-only"></i></h2>
