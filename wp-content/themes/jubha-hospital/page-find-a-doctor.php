@@ -15,69 +15,92 @@
             Explore our network of over 900 doctors to find the best care for your needs.
         </p>
 
-        <div class="search-grid">
+        <!-- SEARCH FORM START -->
+        <form method="GET" class="search-grid">
             <div class="input-wrapper">
                 <span class="input-icon"><i class="fa-solid fa-user"></i></span>
-                <input type="text" placeholder="Doctor's Name">
+                <input 
+                    type="text" 
+                    name="doctor_name" 
+                    placeholder="Doctor's Name" 
+                    value="<?php echo esc_attr($_GET['doctor_name'] ?? ''); ?>">
             </div>
 
             <div class="input-wrapper">
-                <input type="text" placeholder="Speciality">
+                <input 
+                    type="text" 
+                    name="doctor_speciality" 
+                    placeholder="Speciality" 
+                    value="<?php echo esc_attr($_GET['doctor_speciality'] ?? ''); ?>">
             </div>
 
             <div class="input-wrapper">
                 <span class="input-icon"><i class="fa-solid fa-location-dot"></i></span>
-                <select>
-                    <option>Location</option>
-                    <option>Phnom Penh</option>
-                    <option>Siem Reap</option>
-                    <option>Battambang</option>
-                    <option>Sihanoukville</option>
-                    <option>Kampot</option>
-                    <option>Kep</option>
-                    <option>Takeo</option>
-                    <option>Kandal</option>
-                    <option>Prey Veng</option>
-                    <option>Svay Rieng</option>
-                    <option>Kratie</option>
-                    <option>Stung Treng</option>
-                    <option>Ratanakiri</option>
-                    <option>Mondulkiri</option>
-                    <option>Pursat</option>
-                    <option>Koh Kong</option>
-                    <option>Kampong Cham</option>
-                    <option>Kampong Thom</option>
-                    <option>Kampong Chhnang</option>
-                    <option>Oddar Meanchey</option>
-                    <option>Pailin</option>
-                    <option>Preah Vihear</option>
-                    <option>Tbong Khmum</option>
-                    <option>Banteay Meanchey</option>
-                    <option>Tonle Sap</option>
+                <select name="doctor_location">
+                    <option value="">Location</option>
+                    <?php 
+                    $locations = [
+                        "Phnom Penh","Siem Reap","Battambang","Sihanoukville","Kampot","Kep","Takeo",
+                        "Kandal","Prey Veng","Svay Rieng","Kratie","Stung Treng","Ratanakiri","Mondulkiri",
+                        "Pursat","Koh Kong","Kampong Cham","Kampong Thom","Kampong Chhnang","Oddar Meanchey",
+                        "Pailin","Preah Vihear","Tbong Khmum","Banteay Meanchey","Tonle Sap"
+                    ];
+                    foreach ($locations as $loc) : ?>
+                        <option value="<?php echo esc_attr($loc); ?>" <?php selected($_GET['doctor_location'] ?? '', $loc); ?>>
+                            <?php echo esc_html($loc); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
-            <div class="input-wrapper">
-                <span class="input-icon"><i class="fa-solid fa-caret-down"></i></span>
-                <select>
-                    <option>Speciality</option>
-                </select>
-            </div>
-
-            <button class="search-btn">
+            <button type="submit" class="search-btn">
                 Search <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-        </div>
+        </form>
+        <!-- SEARCH FORM END -->
+
     </div>
 </main>
 
 <div class="dashboard-wrapper">
     <div class="modern-doctor-grid">
         <?php
-        $query = new WP_Query(array(
+        // Build WP_Query with search filters
+        $args = [
             'post_type' => 'doctors',
-            'posts_per_page' => 12
-        ));
+            'posts_per_page' => 12,
+        ];
+
+        $meta_query = ['relation' => 'AND'];
+
+        // Filter by doctor name
+        if (!empty($_GET['doctor_name'])) {
+            $args['s'] = sanitize_text_field($_GET['doctor_name']);
+        }
+
+        // Filter by speciality
+        if (!empty($_GET['doctor_speciality'])) {
+            $meta_query[] = [
+                'key' => '_dr_badge', // or '_dr_speciality' if you use a custom field for speciality
+                'value' => sanitize_text_field($_GET['doctor_speciality']),
+                'compare' => 'LIKE',
+            ];
+        }
+
+        // Filter by location
+        if (!empty($_GET['doctor_location'])) {
+            $meta_query[] = [
+                'key' => '_dr_address',
+                'value' => sanitize_text_field($_GET['doctor_location']),
+                'compare' => 'LIKE',
+            ];
+        }
+
+        if (count($meta_query) > 1) {
+            $args['meta_query'] = $meta_query;
+        }
+
+        $query = new WP_Query($args);
 
         if ($query->have_posts()) :
             while ($query->have_posts()) : $query->the_post();

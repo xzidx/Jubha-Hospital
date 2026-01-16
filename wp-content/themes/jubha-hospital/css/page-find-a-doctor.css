@@ -43,7 +43,7 @@ body {
 }
 
 .floating-card h2 {
-    font-size: 24px;
+    font-size: 25px;
     margin-bottom: 10px;
     color: #111827;
 }
@@ -81,7 +81,7 @@ input, select {
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     background-color: #ffffff;
-    font-size: 14px;
+    font-size: 15px;
     color: #374151;
     outline: none;
 }
@@ -105,6 +105,7 @@ input::placeholder {
     align-items: center;
     gap: 8px;
     transition: background 0.2s;
+    font-size: 15px;
 }
 
 .search-btn:hover {
@@ -168,18 +169,26 @@ input::placeholder {
 }
 
 .dr-name { 
-    color: #334d6e; font-size: 25px; margin: 0; }
+    color: #334d6e; 
+    font-size: 25px; 
+    margin: 0;
+ }
 .dr-meta { 
-    color: #90a0b7; font-size: 15px; margin: 5px 0 15px; }
+    color: #90a0b7;
+    font-size: 15px;
+    margin: 10px 0 15px; 
+    
+}
 
 .dr-badge {
     background: #eef2ff;
     color: #4e73df;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     padding: 6px 16px;
-    border-radius: 10px;
+    border-radius: 5px;
     text-transform: uppercase;
+    
 }
 
 /* Footer Buttons */
