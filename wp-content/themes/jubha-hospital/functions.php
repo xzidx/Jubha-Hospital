@@ -123,6 +123,15 @@ function jubha_theme_styles() {
 
 // vannara-space
 
+// CEO Message page
+if (is_page('ceo-message')) {
+        wp_enqueue_style(
+            'ceo-message-style',
+            get_stylesheet_directory_uri() . '/css/ceo-message.css',
+            ['jubha-style'],
+            filemtime(get_stylesheet_directory() . '/css/ceo-message.css')
+        );
+    }
 
 
 

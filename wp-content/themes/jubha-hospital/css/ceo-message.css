@@ -24,22 +24,28 @@
     align-items: center;
     display: inline;
     margin-top: 30px;
+    margin-left: 5%;
 }
 .our-futuer-text h1{
     color: skyblue;
+    margin-left: 5%;
+}.our-futuer-img img{
+    width: 100%;
 }
+
+
 .our-about-ceo{
-    width: 100%;
+    margin-left: 5%;
 }
-.our-about-ceo p{
-    margin-left: 20px;
-}
-.about-ceo{
-    width: 100%;
-}
+
 .about-ceo p{
-    margin-left: 20px
+    margin-left: 5%;
 }
-.dot-icon{
-    font-size: 2px;
+.custom-icon {
+  color: #0b5ed7;   
+  font-size: 6px;   
+  margin-right: 12px;
+  vertical-align: middle;
+  margin-left: 5%;
 }
+
