@@ -5,10 +5,10 @@
         
         <div class="hero-container">
                 <div class="slideshow">
-                    <div class="slide" style="background-image: url('http://jubha-hospital.test/wp-content/uploads/2026/01/bg-banner1.png');"></div>
-                    <div class="slide" style="background-image: url('http://jubha-hospital.test/wp-content/uploads/2026/01/bg-banner4.jpg');"></div>
-                    <div class="slide" style="background-image: url('http://jubha-hospital.test/wp-content/uploads/2026/01/bg-banner3.png');"></div>
-                    <div class="slide" style="background-image: url('http://jubha-hospital.test/wp-content/uploads/2026/01/bg-banner1.png');"></div>
+                    <div class="slide" style="background-image: url('<?php echo get_template_directory_uri(); ?>/picture/bg-banner1.png');"></div>
+                    <div class="slide" style="background-image: url('<?php echo get_template_directory_uri(); ?>/picture/bg-banner3.png');"></div>
+                    <div class="slide" style="background-image: url('<?php echo get_template_directory_uri(); ?>/picture/bg-banner4.jpg');"></div>
+                    <div class="slide" style="background-image: url('<?php echo get_template_directory_uri(); ?>/picture/bg-banner1.png');"></div>
                 </div>
 
                 <div class="hero-text">
@@ -38,8 +38,9 @@
 
             <div class="about-visual-column">
                 <div class="image-card">
-                    <img src="http://jubha-hospital.test/wp-content/uploads/2026/01/bg-banner3.png" alt="Almana Healthcare Team" class="main-img">
-                    
+                    <img src="<?php echo get_template_directory_uri(); ?>/picture/bg-banner3.png"
+                                alt="Almana Healthcare Team"
+                                class="main-img">                         
                    
                 </div>
             </div>
@@ -139,7 +140,8 @@
             <div class="mu-grid">
                 <article class="mu-card">
                     <div class="mu-image-area">
-                        <img src="http://jubha-hospital.test/wp-content/uploads/2026/01/pic3.png" alt="Home Healthcare">
+                        <img src="<?php echo get_template_directory_uri(); ?>/picture/pic3.png" alt="Home Healthcare">
+
                         <div class="mu-date-overlay" style="background-color: #004151;">26 SEP 2023</div>
                     </div>
                     <div class="mu-content-area">
@@ -152,7 +154,8 @@
 
                 <article class="mu-card">
                     <div class="mu-image-area">
-                        <img src="http://jubha-hospital.test/wp-content/uploads/2026/01/pic2.jpg" alt="Immune System">
+                        <img src="<?php echo get_template_directory_uri(); ?>/picture/pic2.jpg" alt="Immune System">
+
                     </div>
                     <div class="mu-content-area">
                         <span class="mu-category">Medical Encyclopedia</span>
@@ -164,7 +167,8 @@
 
                 <article class="mu-card">
                     <div class="mu-image-area">
-                        <img src="http://jubha-hospital.test/wp-content/uploads/2026/01/pic1.jpg" alt="Leukemia Awareness">
+                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/picture/pic1.jpg"  alt="Leukemia Awareness">
+
                     </div>
                     <div class="mu-content-area">
                         <span class="mu-category">Medical Encyclopedia</span>

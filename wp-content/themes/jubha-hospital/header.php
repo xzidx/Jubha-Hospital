@@ -13,7 +13,7 @@
 
 
 <div class="onheader">
-        <div class="onheader-img"><img src="http://jubha-hospital.test/wp-content/uploads/2026/01/jubha-logo.png" alt=""></div>
+        <div class="onheader-img"><img src="<?php echo get_template_directory_uri(); ?>/picture/jubha-logo.png" alt="Jubha Hospital Logo"></div>
         <div class="online-call">
             <a href="">
                 
