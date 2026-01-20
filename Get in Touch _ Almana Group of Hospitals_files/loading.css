@@ -1,0 +1,219 @@
+/* ------------------------------------- */
+/* 1. LOADING SCREEN ................... */
+/* ------------------------------------- */
+.before-loading {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#loading {
+  position: fixed;
+  z-index: 999999999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+#loading:before {
+  position: absolute;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: calc(50% + 2px);
+  content: '';
+  -webkit-transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #003D4D;
+}
+#loading:after {
+  position: absolute;
+  z-index: -20;
+  top: 50%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: calc(50% + 2px);
+  content: '';
+  -webkit-transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #003D4D;
+}
+#loading.loaded:before {
+  -webkit-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+}
+#loading.loaded:after {
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+#loading .loader, #loading .loader__figure {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#loading .loader {
+  overflow: visible;
+  width: 100%;
+  height: 50px;
+  padding: 0 100px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
+#loading .loader.loaded {
+  opacity: 0;
+}
+#loading .loader .dots {
+  font-size: 36px;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  color: #1AA79C;
+}
+#loading .loader .dots:nth-child(3n+0) {
+  color: #fff;
+}
+#loading .loader .dots:nth-child(6) {
+  -webkit-animation: moving 3s infinite ease;
+  animation: moving 3s infinite ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#loading .loader .dots:nth-child(5) {
+  -webkit-animation: moving 3s 100ms infinite ease;
+  animation: moving 3s 100ms infinite ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#loading .loader .dots:nth-child(4) {
+  -webkit-animation: moving 3s 200ms infinite ease;
+  animation: moving 3s 200ms infinite ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#loading .loader .dots:nth-child(3) {
+  -webkit-animation: moving 3s 300ms infinite ease;
+  animation: moving 3s 300ms infinite ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#loading .loader .dots:nth-child(2) {
+  -webkit-animation: moving 3s 400ms infinite ease;
+  animation: moving 3s 400ms infinite ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#loading .loader .dots:nth-child(1) {
+  -webkit-animation: moving 3s 500ms infinite ease;
+  animation: moving 3s 500ms infinite ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#loading .loader .loader__label {
+  font-family: 'AllRoundGothic-Book';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+    padding-top: 15px;
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  margin-left: 0;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  /* WORDS SWAP */
+}
+#loading .loader .loader__label span {
+  position: relative;
+  display: inline-block;
+ font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+}
+#loading .loader .loader__label span#text__loader {
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  -webkit-animation: loader-label 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation: loader-label 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  text-align: left;
+}
+#loading .loader .loader__label [data-words] {
+  position: static;
+  vertical-align: top;
+}
+#loading .loader .loader__label [data-words] > span {
+  position: absolute;
+  color: #1AA79C;
+}
+@-webkit-keyframes moving {
+  0% {
+    -webkit-transform: translateX(-300px);
+    transform: translateX(-300px);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(300px);
+    transform: translateX(300px);
+    opacity: 0;
+  }
+}
+@keyframes moving {
+  0% {
+    -webkit-transform: translateX(-300px);
+    transform: translateX(-300px);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(300px);
+    transform: translateX(300px);
+    opacity: 0;
+  }
+}
+/* Logo Animation*/
+/***************************************************
+ * Generated by SVG Artista on 1/9/2022, 1:13:18 PM
+ * MIT license (https://opensource.org/licenses/MIT)
+ * W. https://svgartista.net
+ **************************************************/
+
+svg .svg-elem-1 {
+  stroke-dashoffset: 1198.3427734375px;
+  stroke-dasharray: 1198.3427734375px;
+  fill: transparent;
+  -webkit-transition: stroke-dashoffset 3s cubic-bezier(0.6, 0.04, 0.98, 0.335) 0s,
+                        fill 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.8s;
+          transition: stroke-dashoffset 3s cubic-bezier(0.6, 0.04, 0.98, 0.335) 0s,
+                fill 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.8s;
+}
+
+svg.active .svg-elem-1 {
+  stroke-dashoffset: 0;
+  fill: rgb(26, 167, 156);
+}

@@ -2,6 +2,9 @@
     height: 50px;
     
 }
+body{
+    margin: 0;
+}
 /* .message{
     width: 100%;
 }
@@ -24,28 +27,41 @@
     align-items: center;
     display: inline;
     margin-top: 30px;
-    margin-left: 5%;
+    margin-left: 3%; 
+    
+}
+.our-futuer-text-img {
+    position: relative;
+    top: 100px;
+    right: 20px;
 }
 .our-futuer-text h1{
-    color: skyblue;
+    color: #1dbbb4;
     margin-left: 5%;
-}.our-futuer-img img{
-    width: 100%;
+}
+.our-futuer-text h2{
+    color: #1dbbb4;
+}
+.our-futuer-text p{
+    font-size: 18px;
+}
+
+.our-about-ceo p{
+    font-size: 18px;
 }
 
 
 .our-about-ceo{
-    margin-left: 5%;
+    margin-left: 3%;
 }
 
 .about-ceo p{
-    margin-left: 5%;
+    margin-left: 3%;
 }
-.custom-icon {
-  color: #0b5ed7;   
-  font-size: 6px;   
+.custom-icon {   
+  font-size: 18px;   
   margin-right: 12px;
   vertical-align: middle;
-  margin-left: 5%;
+  margin-left: 3%;
 }
 

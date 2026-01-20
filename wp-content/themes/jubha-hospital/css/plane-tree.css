@@ -1,0 +1,35 @@
+.space-more{
+    height: 100px;
+}
+body{
+    margin: 0;
+}
+.abstract{
+    justify-content: center;
+    align-items: center;
+}
+.abstract h1{
+    color: #1dbbb4;
+    margin-left: 3%;
+}
+
+.abstract-text{
+    display: flex;
+    align-items: center;
+}
+.abstract-text p{
+    margin-left: 3%;
+    font-size: 18px;
+    margin-top: 2%;
+}
+.abstract-text img{
+    object-fit: cover;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2%;
+}
+.preloadcss-text{
+    margin-left: 3%;
+
+}
