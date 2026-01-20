@@ -1,0 +1,166 @@
+.space-more {
+    height: 50px;
+}
+
+/* Container with a modern medical gradient background */
+.jubha-portal-container {
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top left, #e0f7f6 0%, #1dbbb4 100%);
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Glassmorphism Card Effect */
+.glass-login-card {
+    margin-top: 60px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    padding: 0px 40px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.hospital-logo {
+    max-width: 140px;
+    margin-bottom: 20px;
+}
+
+.glass-login-card h2 {
+    color: #1a4a48;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #668b89;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Form Inputs */
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #1dbbb4;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #cbdada;
+    padding: 10px 0;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-bottom-color: #1dbbb4;
+}
+
+.forgot-link {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    font-size: 14px;
+    color: #1dbbb4;
+    text-decoration: none;
+}
+
+/* The "Cool" Action Button */
+.portal-submit {
+    width: 100%;
+    padding: 16px;
+    background: #1dbbb4;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(29, 187, 180, 0.5);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.portal-submit:hover {
+    background: #18a39d;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -5px rgba(29, 187, 180, 0.6);
+}
+
+.form-divider {
+    margin: 25px 0;
+    display: flex;
+    align-items: center;
+    color: #8fa7a6;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.form-divider::before, .form-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #cbdada;
+    margin: 0 15px;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    border: 1px solid #cbdada;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 18px;
+}
+
+.social-btn:hover {
+    background: #f9fdfd;
+}
+
+.signup-footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #668b89;
+}
+
+.signup-footer a {
+    color: #1dbbb4;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.social-login img {
+    width: 25px;
+    height: 25px;
+}
+.portal-header img {
+    width: 200px;
+    height: 200px;
+}

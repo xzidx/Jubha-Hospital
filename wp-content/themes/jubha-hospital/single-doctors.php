@@ -18,7 +18,6 @@
 
 <main class="dr-profile-wrapper">
 
-    <!-- Header Card -->
     <section class="dr-header-card">
         <div class="dr-image-side">
             <?php if ($img_url): ?>
@@ -61,13 +60,12 @@
                 <?php endif; ?>
             </div>
 
-            <a href="#book" class="dr-book-btn">
+            <a href="<?php echo home_url('/book-appointment/?doc_id=' . get_the_ID()); ?>" class="dr-book-btn">
                 <i class="fa-regular fa-calendar-days"></i> BOOK AN APPOINTMENT
             </a>
         </div>
     </section>
 
-    <!-- Details Sections -->
     <section class="dr-details-container">
 
         <?php if ($bio): ?>

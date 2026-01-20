@@ -18,10 +18,10 @@
             <a href="">
                 
             </a>
-            <a href="">
+            <a href="/login/">
                 <h2><i class="fa-solid fa-user phone-only"></i></h2>
             </a>
-            <a href="<?php echo get_permalink( get_page_by_path('doctor-schedule') ); ?>">
+            <a href="/book-appointment/">
                 <h1><i class="fa-solid fa-calendar-days phone-only"></i>Book An Appointment</h1>
             </a>
             
