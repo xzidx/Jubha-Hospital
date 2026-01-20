@@ -29,6 +29,7 @@
 }
 
 .sidebar h3 {
+    font-size: 20px;
     color: #004151;
     border-bottom: 2px solid #004151;
     padding-bottom: 8px;
@@ -37,6 +38,8 @@
 .sidebar ul {
     list-style: none;
     padding: 0;
+    font-size: 18px;
+    
 }
 
 .sidebar a {
@@ -60,11 +63,15 @@
 }
 .tab-content h2 {
     color: #004151;
-    font-size: 20px;
+    font-size: 25px;
 }
 .tab-content p {
-    font-size: 17px;
+    font-size: 20px;
     color: #444444;
+}
+.tab-content ul {
+    font-size: 18px;
+    line-height: 30px;
 }
 .tab-content.active {
     display: block;
@@ -90,7 +97,7 @@
     color: white;
 }
 .tab-content img {
-    width: 70%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
     margin-bottom: 20px;

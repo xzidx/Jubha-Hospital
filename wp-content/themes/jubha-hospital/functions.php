@@ -330,3 +330,113 @@ add_action('save_post', function($post_id) {
         }
     }
 });
+
+function jubha_handle_registration() {
+    // Only run if the form was submitted
+    if ( isset($_POST['jubha_signup_submit']) ) {
+        
+        $email      = sanitize_email($_POST['user_email']);
+        $password   = $_POST['user_password'];
+        $first_name = sanitize_text_field($_POST['first_name']);
+        $last_name  = sanitize_text_field($_POST['last_name']);
+
+        if ( email_exists($email) ) {
+            wp_die('This email is already registered. <a href="/login">Login here</a>');
+        }
+
+        // CREATE THE USER
+        $user_id = wp_create_user($email, $password, $email);
+
+        if ( !is_wp_error($user_id) ) {
+            wp_update_user([
+                'ID'         => $user_id,
+                'first_name' => $first_name,
+                'last_name'  => $last_name,
+            ]);
+
+            // AUTO LOGIN
+            wp_set_current_user($user_id);
+            wp_set_auth_cookie($user_id);
+
+            // REDIRECT
+            wp_redirect(home_url('/profile/')); 
+            exit;
+        } else {
+            wp_die('Error creating user: ' . $user_id->get_error_message());
+        }
+    }
+}
+// Using 'init' ensures the redirect happens before the page loads
+add_action('init', 'jubha_handle_registration');
+// login
+function jubha_handle_login() {
+    if ( isset($_POST['jubha_login_submit']) ) {
+        
+        $creds = array(
+            'user_login'    => sanitize_text_field($_POST['jubha_user_login']),
+            'user_password' => $_POST['jubha_user_pass'],
+            'remember'      => true
+        );
+
+        $user = wp_signon($creds, false);
+
+        if ( is_wp_error($user) ) {
+            // Error handling: You can redirect back with an error message
+            wp_die('Invalid username or password. Please try again.');
+        } else {
+            // SUCCESS! Redirect to the profile page
+            wp_redirect( home_url('/profile/') ); 
+            exit;
+        }
+    }
+}
+add_action('template_redirect', 'jubha_handle_login');
+
+// 1. Create the Menu in the Sidebar
+add_action('admin_menu', 'jubha_patient_admin_menu');
+
+function jubha_patient_admin_menu() {
+    add_menu_page(
+        'Patient Accounts',    // Page Title
+        'Patient Accounts',    // Menu Title in Sidebar
+        'manage_options',      // Who can see it (Admins)
+        'patient-list',        // URL Slug
+        'jubha_patient_page_display', // Function that shows the content
+        'dashicons-id-alt',    // Icon
+        6                      // Position in sidebar
+    );
+}
+
+// 2. The Content of the Page
+function jubha_patient_page_display() {
+    ?>
+    <div class="wrap">
+        <h1 style="color: #1dbbb4;">Jubha Hospital: Registered Patients</h1>
+        <p>This is a list of all patients who have created an account on your website.</p>
+        
+        <table class="wp-list-table widefat fixed striped">
+            <thead>
+                <tr>
+                    <th><b>Name</b></th>
+                    <th><b>Email Address</b></th>
+                    <th><b>Password Status</b></th>
+                    <th><b>Date Registered</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $patients = get_users(array('role' => 'subscriber')); // Gets all signed-up users
+                foreach ($patients as $user) {
+                    echo '<tr>';
+                    echo '<td>' . esc_html($user->first_name . ' ' . $user->last_name) . ' ' . '</td>';
+                    echo '<td>' . esc_html($user->user_email) . '</td>';
+                    echo '<td><span style="color: green;">✔ Encrypted & Secure</span></td>'; // Passwords are hidden for safety
+                    echo '<td>' . esc_html($user->user_registered) . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}

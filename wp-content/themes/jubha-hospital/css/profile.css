@@ -1,0 +1,131 @@
+
+.space-more {
+    height: 60px;
+}
+/* Dashboard Layout */
+.jubha-dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background: #f0f7f7;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 260px;
+    background: #004151bb;
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1dbbb4;
+    margin-bottom: 50px;
+}
+
+.sidebar nav a {
+    display: block;
+    color: #a7f3f0;
+    text-decoration: none;
+    padding: 12px 0;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.sidebar nav a:hover, .sidebar nav a.active {
+    color: white;
+    padding-left: 10px;
+}
+
+.sidebar-footer { margin-top: auto; }
+
+/* Main Content Area */
+.dashboard-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.user-welcome h1 { color: #1a4a48; margin: 0; }
+.user-avatar img { border-radius: 50%; width: 50px; border: 2px solid #1dbbb4; }
+
+/* Stats Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.stat-icon { 
+    font-size: 24px; 
+    background: #e0f7f6; 
+    padding: 10px; 
+    border-radius: 12px; 
+}
+.stat-info h3 { 
+    font-size: 14px; 
+    margin: 0; 
+    color: #668b89;
+ }
+.stat-info p { 
+    margin: 5px 0 0; 
+    font-weight: 700; 
+    color: #1a4a48; 
+}
+
+/* Profile Detail Section */
+.profile-details-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.detail-item { 
+    font-size: 15px;
+    color: #1a4a48;
+ }
+
+.edit-profile-btn {
+    background: #1dbbb4;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-profile-btn:hover { background: #18a39d; box-shadow: 0 8px 15px rgba(29, 187, 180, 0.3); }
+

@@ -1,255 +1,146 @@
 <?php
 /**
- * Plugin Name: Books Apointment
- * Plugin URI:  
- * Description: This plugin make for hospital that make the user and docotor more easy about the meeting.this is a book apointment plugin that help doctor in our hospital.
- * Version:     1.0.0
+ * Plugin Name: Books Appointment - Jubha Hospital
+ * Description: Final Version: Secure Booking, Patient Management, and Fixed Admin Columns.
+ * Version:     2.2.0
  * Author:      Chan Samnang
- * Author URI:  
- * License:     ISO 9001
- * Text Domain: Lucky-World
  */
 
-add_action('admin_menu', function() {
+if (!defined('ABSPATH')) exit;
 
-    // Top-level menu "Appointment Form" -> redirect to Doctor form
-    add_menu_page(
-        'Appointment Form',
-        'Appointment Form',
-        'manage_options',
-        'clinic-dashboard',
-        function() {
-            $first_submenu = admin_url('admin.php?page=doctor-form');
-            echo "<script>location.href='$first_submenu';</script>";
-        },
-        'dashicons-book',
-        6
-    );
+// 1. CREATE POST TYPE
+add_action('init', 'jubha_setup_system');
+function jubha_setup_system() {
+    register_post_type('jubha_appointment', array(
+        'labels' => array('name' => 'Appointments', 'singular_name' => 'Appointment'),
+        'public' => false,
+        'show_ui' => true,
+        'menu_icon' => 'dashicons-calendar-alt',
+        'supports' => array('title'), 
+        'menu_position' => 5
+    ));
+}
 
-    // Doctor form submenu
-    add_submenu_page(
-        'clinic-dashboard',
-        'Doctor Form',
-        'Doctor',
-        'manage_options',
-        'doctor-form',
-        'render_doctor_form'
-    );
+// 2. PATIENT ACCOUNTS MENU
+add_action('admin_menu', 'jubha_patient_menu');
+function jubha_patient_menu() {
+    add_menu_page('Patient Accounts', 'Patient Accounts', 'manage_options', 'patient-list', 'jubha_render_patient_list', 'dashicons-id-alt', 6);
+}
 
-    // Patient form submenu
-    add_submenu_page(
-        'clinic-dashboard',
-        'Patient Form',
-        'Patient',
-        'manage_options',
-        'patient-form',
-        'render_patient_form'
-    );
-
-    // Appointments database submenu (read-only)
-    add_submenu_page(
-        'clinic-dashboard',
-        'Appointments Database',
-        'Appointments',
-        'manage_options',
-        'service-form',
-        'render_service_form'
-    );
-
-    // Remove duplicate top-level submenu
-    remove_submenu_page('clinic-dashboard', 'clinic-dashboard');
-});
-
-// ------------------------
-// 2️⃣ Doctor Form
-// ------------------------
-function render_doctor_form() {
+function jubha_render_patient_list() {
     ?>
-    <h1>Doctor Form</h1>
-    <form method="post">
-        <p><label>Name:</label><br>
-        <input type="text" name="doctor_name" required></p>
-
-        <p><label>Specialty:</label><br>
-        <input type="text" name="doctor_specialty"></p>
-
-        <p><label>Phone:</label><br>
-        <input type="text" name="doctor_phone"></p>
-
-        <p><input type="submit" name="submit_doctor" value="Save"></p>
-    </form>
+    <div class="wrap">
+        <h1 style="color: #1dbbb4;">Jubha Hospital: Registered Patients</h1>
+        <table class="wp-list-table widefat fixed striped">
+            <thead>
+                <tr><th>Full Name</th><th>Email</th><th>Phone Number</th><th>Patient ID</th></tr>
+            </thead>
+            <tbody>
+                <?php
+                $patients = get_users(array('role' => 'subscriber'));
+                foreach ($patients as $user) {
+                    $fname = get_user_meta($user->ID, 'first_name', true);
+                    $lname = get_user_meta($user->ID, 'last_name', true);
+                    $phone = get_user_meta($user->ID, 'phone_number', true);
+                    echo "<tr>
+                            <td><strong>" . esc_html($fname . ' ' . $lname) . "</strong></td>
+                            <td>" . esc_html($user->user_email) . "</td>
+                            <td>" . esc_html($phone) . "</td>
+                            <td>JH-" . esc_html($user->ID) . "</td>
+                          </tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
     <?php
-    if (isset($_POST['submit_doctor'])) {
-        $name = sanitize_text_field($_POST['doctor_name']);
-        $specialty = sanitize_text_field($_POST['doctor_specialty']);
-        $phone = sanitize_text_field($_POST['doctor_phone']);
+}
 
-        $post_id = wp_insert_post([
-            'post_title'  => $name,
-            'post_type'   => 'doctor',
+// 3. SECURE SAVE APPOINTMENT LOGIC
+add_action('template_redirect', 'jubha_handle_appointment_save');
+function jubha_handle_appointment_save() {
+    if (isset($_POST['submit_booking'])) {
+        
+        // SECURITY: Stop guest users from saving to database
+        if (!is_user_logged_in()) {
+            wp_die('Error: You must be logged in to book an appointment.');
+        }
+
+        $user = wp_get_current_user();
+        
+        // Update user phone number in profile
+        if (!empty($_POST['phone_number'])) {
+            update_user_meta($user->ID, 'phone_number', sanitize_text_field($_POST['phone_number']));
+        }
+
+        // Get Names for Admin Columns
+        $fname = get_user_meta($user->ID, 'first_name', true);
+        $lname = get_user_meta($user->ID, 'last_name', true);
+        $patient_display_name = trim($fname . ' ' . $lname);
+        if (empty($patient_display_name)) $patient_display_name = $user->display_name;
+
+        $doc_id = intval($_POST['selected_doctor']);
+        $doc_name = get_the_title($doc_id);
+
+        // CREATE POST (Main title is Gmail/Email as requested)
+        $appt_id = wp_insert_post(array(
+            'post_type'   => 'jubha_appointment',
+            'post_title'  => $user->user_email, 
             'post_status' => 'publish',
-            'meta_input'  => [
-                '_doctor_specialty' => $specialty,
-                '_doctor_phone' => $phone,
-            ],
-        ]);
+        ));
 
-        if ($post_id) {
-            echo '<p style="color:green;">Doctor saved successfully!</p>';
+        if ($appt_id) {
+            update_post_meta($appt_id, '_patient_id', $user->ID);
+            update_post_meta($appt_id, '_patient_name_col', $patient_display_name);
+            update_post_meta($appt_id, '_doctor_name_col', $doc_name);
+            update_post_meta($appt_id, '_appt_date', sanitize_text_field($_POST['appointment_date']));
+            update_post_meta($appt_id, '_appt_time', sanitize_text_field($_POST['appointment_time']));
+            update_post_meta($appt_id, '_dept', sanitize_text_field($_POST['department']));
+            update_post_meta($appt_id, '_reason', sanitize_textarea_field($_POST['visit_reason']));
+            
+            wp_redirect(home_url('/profile/?booking=success'));
+            exit;
         }
     }
 }
 
-// ------------------------
-// 3️⃣ Patient Form (auto-create appointment)
-// ------------------------
-function render_patient_form() {
-    ?>
-    <h1>Patient Form</h1>
-    <form method="post">
-        <p><label>Name:</label><br>
-        <input type="text" name="patient_name" required></p>
-
-        <p><label>Phone:</label><br>
-        <input type="text" name="patient_phone"></p>
-
-        <p><label>Email:</label><br>
-        <input type="email" name="patient_email"></p>
-
-        <p><label>Notes:</label><br>
-        <textarea name="patient_notes"></textarea></p>
-
-        <p><input type="submit" name="submit_patient" value="Save"></p>
-    </form>
-    <?php
-
-    if (isset($_POST['submit_patient'])) {
-        $name = sanitize_text_field($_POST['patient_name']);
-        $phone = sanitize_text_field($_POST['patient_phone']);
-        $email = sanitize_email($_POST['patient_email']);
-        $notes = sanitize_textarea_field($_POST['patient_notes']);
-
-        // 1️⃣ Save patient
-        $patient_id = wp_insert_post([
-            'post_title'  => $name,
-            'post_type'   => 'patient',
-            'post_status' => 'publish',
-            'meta_input'  => [
-                '_patient_phone' => $phone,
-                '_patient_email' => $email,
-                '_patient_notes' => $notes,
-            ],
-        ]);
-
-        if ($patient_id) {
-            echo '<p style="color:green;">Patient saved successfully!</p>';
-
-            // 2️⃣ Automatically create an appointment in Service CPT (database)
-            wp_insert_post([
-                'post_title'  => 'Appointment: ' . $name,
-                'post_type'   => 'service',
-                'post_status' => 'publish',
-                'meta_input'  => [
-                    '_appointment_patient' => $patient_id,
-                    '_appointment_doctor' => '',          // leave empty for now
-                    '_appointment_datetime' => '',        // leave empty for now
-                    '_appointment_description' => $notes, // store patient notes
-                ],
-            ]);
-        }
-    }
+// 4. ADMIN UI: DEFINE COLUMNS
+add_filter('manage_jubha_appointment_posts_columns', 'jubha_set_appointment_columns');
+function jubha_set_appointment_columns($columns) {
+    return array(
+        'cb'            => '<input type="checkbox" />',
+        'title'         => 'Email (ID)',
+        'patient_name'  => 'Patient Name',
+        'doctor_name'   => 'Doctor Name',
+        'patient_phone' => 'Patient Phone',
+        'schedule'      => 'Date & Time',
+        'dept'          => 'Department',
+        'visit_reason'  => 'Reason'
+    );
 }
 
-// ------------------------
-// 4️⃣ Appointments Database (read-only)
-// ------------------------
-function render_service_form() {
-    echo '<h1>Appointments Database</h1>';
-
-    $appointments = get_posts([
-        'post_type' => 'service',
-        'posts_per_page' => -1,
-        'orderby' => 'date',
-        'order' => 'DESC',
-    ]);
-
-    if (empty($appointments)) {
-        echo '<p>No appointments yet.</p>';
-        return;
+// 5. ADMIN UI: FILL DATA (Fixes empty columns in your image)
+add_action('manage_jubha_appointment_posts_custom_column', 'jubha_fill_appointment_columns', 10, 2);
+function jubha_fill_appointment_columns($column, $post_id) {
+    switch ($column) {
+        case 'patient_name':
+            echo '<strong>' . esc_html(get_post_meta($post_id, '_patient_name_col', true)) . '</strong>';
+            break;
+        case 'doctor_name':
+            echo '<span style="color: #1dbbb4; font-weight:600;">Dr. ' . esc_html(get_post_meta($post_id, '_doctor_name_col', true)) . '</span>';
+            break;
+        case 'patient_phone':
+            $p_id = get_post_meta($post_id, '_patient_id', true);
+            echo esc_html(get_user_meta($p_id, 'phone_number', true));
+            break;
+        case 'schedule':
+            echo esc_html(get_post_meta($post_id, '_appt_date', true)) . "<br><small>" . esc_html(get_post_meta($post_id, '_appt_time', true)) . "</small>";
+            break;
+        case 'dept':
+            echo ucfirst(esc_html(get_post_meta($post_id, '_dept', true)));
+            break;
+        case 'visit_reason':
+            echo '<span style="font-size:12px; color: #666;">' . esc_html(get_post_meta($post_id, '_reason', true)) . '</span>';
+            break;
     }
-
-    echo '<table class="widefat striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>Date/Time</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody>';
-
-    foreach ($appointments as $appt) {
-        $patient = get_post_meta($appt->ID, '_appointment_patient', true);
-        $doctor = get_post_meta($appt->ID, '_appointment_doctor', true);
-        $datetime = get_post_meta($appt->ID, '_appointment_datetime', true);
-        $notes = get_post_meta($appt->ID, '_appointment_description', true);
-
-        echo '<tr>
-            <td>' . $appt->ID . '</td>
-            <td>' . ($patient ? get_the_title($patient) : '-') . '</td>
-            <td>' . ($doctor ? get_the_title($doctor) : '-') . '</td>
-            <td>' . esc_html($datetime) . '</td>
-            <td>' . esc_html($notes) . '</td>
-        </tr>';
-    }
-
-    echo '</tbody></table>';
 }
-
-// ------------------------
-// 5️⃣ Register Custom Post Types
-// ------------------------
-add_action('init', function() {
-    // Doctor CPT
-    register_post_type('doctor', [
-        'labels' => [
-            'name' => 'Doctors',
-            'singular_name' => 'Doctor',
-        ],
-        'public' => true,
-        'show_ui' => false,
-        'has_archive' => true,
-    ]);
-
-    // Patient CPT
-    register_post_type('patient', [
-        'labels' => [
-            'name' => 'Patients',
-            'singular_name' => 'Patient',
-        ],
-        'public' => true,
-        'show_ui' => false,
-        'has_archive' => true,
-    ]);
-
-    // Service / Appointment CPT (database)
-    register_post_type('service', [
-        'labels' => [
-            'name' => 'Appointments',
-            'singular_name' => 'Appointment',
-        ],
-        'public' => true,
-        'show_ui' => false, // hide editor, read-only
-        'has_archive' => true,
-    ]);
-});
-
-// Optional: style table
-add_action('admin_head', function() {
-    echo '<style>
-        .widefat th, .widefat td { padding: 8px; }
-        .widefat th { text-align: left; }
-    </style>';
-});
